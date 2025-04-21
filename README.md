@@ -8,13 +8,11 @@ This project demonstrates an automated deployment of a portfolio website on AWS 
 
 
 - [📌 Project Overview]
-- [📐 Architecture Diagram]
 - [🧰 Technologies Used]
 - [🛠️ Infrastructure Details]
-- [📁 Project Structure]
 - [🚀 Getting Started]
-- [🧹 Cleanup](#-cleanup)
-- [📸 Demo Screenshots]
+- [🧹 Cleanup]
+- [📸 Screenshots]
 - [🧠 What I Learned]
 - [📌 Future Improvements]
 
