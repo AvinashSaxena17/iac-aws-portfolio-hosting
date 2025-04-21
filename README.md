@@ -77,7 +77,7 @@ terraform apply
 ## 🧹 Cleanup
 
 ```bash
-# To destroy all resources:
+# Destroy all Terraform-managed infrastructure to avoid ongoing costs
 terraform destroy
 ```
 ## 🌍 Output:
