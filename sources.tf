@@ -60,8 +60,8 @@ resource "aws_s3_object" "html" {
 
 #create Key_pair instance
 resource "aws_key_pair" "Deployer" {
-  key_name   = "Deployer_key"
-  public_key = file("${path.module}/Deployer_key.pub")
+  key_name   = "YOUR_SSH_KEY"
+  public_key = file("${path.module}/YOUR_SSH_KEY")
 }
 
 #Create EC2 instance
