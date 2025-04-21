@@ -89,6 +89,34 @@ After a successful terraform apply :
 2. Paste this URL into your browser to see your deployed portfolio live.
 
 
+## [📸 website-accessed-via-aws-alb-dns]
+
+![App Screenshot](https://github.com/AvinashSaxena17/iac-aws-portfolio-hosting/blob/246578d388fde92b6de371bbec784e5aca16b640/ALB%20DNS.png)
+
+## 🧠 What I Learned
+
+- Automating EC2 and ALB setup using Terraform modules
+
+- Using IAM roles to securely access S3 from EC2
+
+- Syncing contents to NGINX from S3 to ec2  using AWS CLI
+
+- Managing production-like deployments using Infrastructure as Code
+
+- Building scalable and highly available architecture on AWS
+
+## 📌 Future Improvements
+
+- Add SSL using ACM and redirect HTTP to HTTPS
+
+- Integrate Route 53 to map a custom domain
+
+- Use GitHub Actions for CI/CD pipeline
+
+- Enable CloudWatch logs and alarms
+
+
+
 
 
 
