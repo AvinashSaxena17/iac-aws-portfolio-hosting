@@ -47,12 +47,91 @@ This project demonstrates an automated deployment of a portfolio website on AWS 
 | User Data Script      | Uses AWS CLI to sync S3 files to EC2 web root                |
 | Security Groups       | Controls HTTP/SSH access                                     |
 
-## 🚀 Getting Started
+## 🧱 Step-by-Step Process
 
 ### ✅ Prerequisites
 
 - Terraform installed
 - Any Linux OS /Git Terminal
+
+Let me walk you through what I actually did—step by step—and how the entire process was automated using Terraform.
+
+### 1. Create a Unique S3 Bucket:
+
+- Create an S3 bucket with a unique name to store website files.
+
+![App Screenshot]()
+
+### 2. Upload Website Files to S3:
+
+- Upload all your website files (HTML, CSS, JS, etc.) to the S3 bucket.
+
+![App Screenshot]()
+
+### 3. Create VPC and Public Subnets:
+
+- Create a VPC with multiple availability zones (AZs).
+
+- Set up public subnets in these AZs. Ensure that the front-end resources are publicly accessible.
+
+![App Screenshot]()
+
+### 4. Set Up an Internet Gateway:
+
+- Create an Internet Gateway to enable internet access for the resources in the public subnet.
+
+![App Screenshot]()
+
+### 5. Create Route Table:
+
+- Create a route table that routes traffic through the Internet Gateway.
+
+![App Screenshot]()
+
+
+### 6. Associate Subnets with the Route Table:
+
+- Associate the public subnets with the route table so that all resources in these subnets can access the internet.
+
+![App Screenshot]()
+
+### 7. Generate an AWS Private Key for EC2:
+
+- Create an AWS private key to enable SSH access to EC2 instances in private subnets.
+
+![App Screenshot]()
+
+
+### 8. Launch EC2 Instances:
+
+- Create EC2 instances with security groups that allow SSH (port 22) and HTTP (port 80) access.
+
+
+![App Screenshot]()
+
+### 9. Set Up EC2 IAM Role for S3 Access:
+
+- Create an IAM role for the EC2 instances that allows them to access the S3 bucket and retrieve website files.
+
+![App Screenshot]()
+
+### 10 Install and Configure NGINX on EC2:
+
+
+- Write a script to install and configure NGINX on the EC2 instances.
+
+- Sync the files from the S3 bucket to the NGINX server so the website is served correctly.
+
+![App Screenshot]()
+
+### 11. Deploy an Application Load Balancer (ALB):
+
+- Create an Application Load Balancer (ALB) to distribute incoming traffic across EC2 instances in different subnets.
+
+- The website will be accessible via the ALB’s DNS name.
+
+![App Screenshot]()
+
 
 ### 🔧 Deployment Steps
 
