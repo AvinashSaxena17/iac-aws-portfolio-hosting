@@ -60,13 +60,13 @@ Let me walk you through what I actually did—step by step—and how the entire 
 
 - Create an S3 bucket with a unique name to store website files.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/s3-bucket-source.png)
 
 ### 2. Upload Website Files to S3:
 
 - Upload all your website files (HTML, CSS, JS, etc.) to the S3 bucket.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/s3-files-upload.png)
 
 ### 3. Create VPC and Public Subnets:
 
@@ -74,32 +74,34 @@ Let me walk you through what I actually did—step by step—and how the entire 
 
 - Set up public subnets in these AZs. Ensure that the front-end resources are publicly accessible.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-vpc.png)
+
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-subnet.png)
 
 ### 4. Set Up an Internet Gateway:
 
 - Create an Internet Gateway to enable internet access for the resources in the public subnet.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-igw.png)
 
 ### 5. Create Route Table:
 
 - Create a route table that routes traffic through the Internet Gateway.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-RT.png)
 
 
 ### 6. Associate Subnets with the Route Table:
 
 - Associate the public subnets with the route table so that all resources in these subnets can access the internet.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-RT%20Association.png)
 
 ### 7. Generate an AWS Private Key for EC2:
 
 - Create an AWS private key to enable SSH access to EC2 instances in private subnets.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-private%20key.png)
 
 
 ### 8. Launch EC2 Instances:
@@ -107,30 +109,41 @@ Let me walk you through what I actually did—step by step—and how the entire 
 - Create EC2 instances with security groups that allow SSH (port 22) and HTTP (port 80) access.
 
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-instamce.png)
 
 ### 9. Set Up EC2 IAM Role for S3 Access:
 
 - Create an IAM role for the EC2 instances that allows them to access the S3 bucket and retrieve website files.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-IAM.png)
 
 ### 10 Install and Configure NGINX on EC2:
 
+- Install AWS CLI on the EC2 instance using a script. This allows the instance to run AWS commands, such as syncing S3 bucket files with the NGINX web directory. 
 
 - Write a script to install and configure NGINX on the EC2 instances.
 
 - Sync the files from the S3 bucket to the NGINX server so the website is served correctly.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-nginx.png)
 
-### 11. Deploy an Application Load Balancer (ALB):
+### 11. Configure Target Groups:
 
-- Create an Application Load Balancer (ALB) to distribute incoming traffic across EC2 instances in different subnets.
+- Create a target group for the EC2 instances.
 
-- The website will be accessible via the ALB’s DNS name.
+- Register the instances in this group to handle web traffic.
 
-![App Screenshot]()
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-TG.png)
+
+### 12. Deploy an Application Load Balancer (ALB):
+
+- **Create the ALB:** Set up an Application Load Balancer using public subnets so it can receive traffic from the internet.
+- **Add a Listener:** Create a listener on port 80 to handle incoming HTTP requests.
+- **Forward Traffic:** Link the listener to a target group so the ALB can forward requests to your EC2 instances.
+
+
+![App Screenshot](https://github.com/AvinashSaxena17/terraform-aws-nginx-portfolio-alb/blob/91c50f3308c8164ef698f6904d7dc083c766c244/ec2%20images/ec2-ALB.png)
+
 
 
 ### 🔧 Deployment Steps
